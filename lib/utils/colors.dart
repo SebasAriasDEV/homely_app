@@ -19,3 +19,11 @@ const Color kSuccessColor = Color(0xFF2FAC7D);
 const Color kErrorColor = Color(0xFFEB2A48);
 const Color kWarningColor = Color(0xFFF1E43A);
 const Color kInformationColor = Color(0xFF00BAFB);
+
+//Explore buttons
+const Color kArticlesColor = Color(0xFFDB2F2F);
+const Color kClasificadosColor = Color(0xFFEBB52A);
+const Color kDirectoryColor = Color(0xFF56A4D0);
+const Color kReservationsColor = Color(0xFFEB622A);
+const Color kPQRSColor = Color(0xFF50C05B);
+const Color kOtherColor = Color(0xFFD056C4);

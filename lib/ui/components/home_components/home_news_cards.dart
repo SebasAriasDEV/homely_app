@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:homely_app/models/article_model.dart';
 import 'package:homely_app/ui/components/label_box.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
 import 'package:homely_app/utils/themes/themes.dart';
 
 class HomeNewsList extends StatelessWidget {
+  final List<Article> articles;
+
   const HomeNewsList({
     Key? key,
+    required this.articles,
   }) : super(key: key);
 
   @override
@@ -17,7 +21,7 @@ class HomeNewsList extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(left: CustomThemes.horizontalPadding),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
+        itemCount: articles.length,
         separatorBuilder: (_, index) => const SizedBox(width: 10),
         itemBuilder: (_, index) => Container(
           width: 200,
@@ -27,8 +31,7 @@ class HomeNewsList extends StatelessWidget {
             color: kWhiteColor,
             borderRadius: BorderRadius.circular(12.0),
           ),
-          child: const _HomeNewsCard(
-              labelText1: 'Zonas Comunes', daysText: '5 dias', imageURL: 'https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=700',),
+          child: _HomeNewsCard(article: articles[index]),
         ),
       ),
     );
@@ -36,19 +39,15 @@ class HomeNewsList extends StatelessWidget {
 }
 
 class _HomeNewsCard extends StatelessWidget {
-  final String labelText1;
-  final String daysText;
-  final String? imageURL;
+  final Article article;
 
-  const _HomeNewsCard({
-    Key? key,
-    required this.labelText1,
-    required this.daysText,
-    this.imageURL,
-  }) : super(key: key);
+  const _HomeNewsCard({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final days =
+        DateTime.now().toUtc().difference(article.createdAt).inDays.toString();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,14 +57,14 @@ class _HomeNewsCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
             child: Image.network(
-              imageURL!,
+              article.img,
               fit: BoxFit.fill,
             ),
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          'Nueva compañia de segurirad desde Febrero 2022',
+        Text(
+          article.title,
           style: headline8,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -75,12 +74,13 @@ class _HomeNewsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             LabelBox(
-              text: labelText1,
+              text: article.keyWord,
               backgroundColor: kPrimaryColorShade4,
               textColor: kPrimaryColor,
             ),
             LabelBox(
-              text: daysText,
+              text: '$days dias',
+              svgIcon: 'assets/icons/clock.svg',
               backgroundColor: kGreyColorShade4,
               textColor: kGreyColor,
             ),
