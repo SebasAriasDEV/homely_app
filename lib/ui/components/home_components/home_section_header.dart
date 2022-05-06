@@ -27,7 +27,7 @@ class HomeSectionHeader extends StatelessWidget {
           TextButton(
             child: Text(buttonText,
                 style: headline8.copyWith(color: kPrimaryColor)),
-            onPressed: () => onTap,
+            onPressed: () => onTap(),
           ),
         ],
       ),

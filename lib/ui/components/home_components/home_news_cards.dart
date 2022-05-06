@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homely_app/helpers/common_functions.dart';
 import 'package:homely_app/models/article_model.dart';
 import 'package:homely_app/ui/components/label_box.dart';
 import 'package:homely_app/utils/colors.dart';
@@ -45,8 +46,7 @@ class _HomeNewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final days =
-        DateTime.now().toUtc().difference(article.createdAt).inDays.toString();
+    final days = CommonFunctions.daysFromNow(article.createdAt);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

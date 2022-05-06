@@ -4,34 +4,47 @@ import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({ Key? key }) : super(key: key);
+  const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-        selectedLabelStyle: paragraph6,
-        unselectedLabelStyle: paragraph6,
-        selectedItemColor: kPrimaryColor,
-        unselectedItemColor: kGreyColor,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/home.svg'),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/message-question.svg'),
-            label: 'PQRS',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/route-square.svg'),
-            label: 'Directory',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/icons/more-circle.svg'),
-            label: 'Others',
-          ),
-        ],
-      );
+      currentIndex: 0,
+      selectedLabelStyle: paragraph6,
+      unselectedLabelStyle: paragraph6,
+      selectedItemColor: kPrimaryColor,
+      unselectedItemColor: kGreyColor,
+      type: BottomNavigationBarType.fixed,
+      items: [
+        BottomNavigationBarItem(
+          activeIcon: SvgPicture.asset('assets/icons/home-active.svg',
+              color: kPrimaryColor),
+          icon: SvgPicture.asset('assets/icons/home-inactive.svg',
+              color: kGreyColor),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          activeIcon: SvgPicture.asset('assets/icons/pqrs-active.svg',
+              color: kPrimaryColor),
+          icon: SvgPicture.asset('assets/icons/pqrs-inactive.svg',
+              color: kGreyColor),
+          label: 'PQRS',
+        ),
+        BottomNavigationBarItem(
+          activeIcon: SvgPicture.asset('assets/icons/directory-active.svg',
+              color: kPrimaryColor),
+          icon: SvgPicture.asset('assets/icons/directory-inactive.svg',
+              color: kGreyColor),
+          label: 'Directory',
+        ),
+        BottomNavigationBarItem(
+          activeIcon: SvgPicture.asset('assets/icons/others-active.svg',
+              color: kPrimaryColor),
+          icon: SvgPicture.asset('assets/icons/others-inactive.svg',
+              color: kGreyColor),
+          label: 'Others',
+        ),
+      ],
+    );
   }
 }

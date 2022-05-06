@@ -27,3 +27,11 @@ const Color kDirectoryColor = Color(0xFF56A4D0);
 const Color kReservationsColor = Color(0xFFEB622A);
 const Color kPQRSColor = Color(0xFF50C05B);
 const Color kOtherColor = Color(0xFFD056C4);
+
+//Label box colors
+const Color kBlueTextColor = Color(0xFF28A1F8);
+const Color kBlueBgColor = Color(0xFFEBF2F7);
+const Color kGreenTextColor = Color(0xFF5EBA32);
+const Color kGreenBgColor = Color(0xFFF2F9EF);
+const Color kRedTextColor = Color(0xFFB64F4F);
+const Color kRedBgColor = Color(0xFFF7EBEB);

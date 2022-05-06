@@ -33,5 +33,19 @@ class CustomThemes {
         style: TextButton.styleFrom(
       primary: kPrimaryColor,
     )),
+
+    //TextFields
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: kWhiteColor,
+      hintStyle: paragraph2.copyWith(color: kGreyColor),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(
+          width: 0,
+          style: BorderStyle.none,
+        ),
+      ),
+    ),
   );
 }

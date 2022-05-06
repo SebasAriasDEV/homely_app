@@ -71,6 +71,21 @@ const paragraph2 = TextStyle(
   color: kBlackColor,
 );
 
+const paragraph3 = TextStyle(
+  fontSize: 16.0,
+  //height: 24.0,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.w400,
+  color: kBlackColor,
+);
+
+const paragraph5 = TextStyle(
+  fontSize: 14.0,
+  //height: 24.0,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.w400,
+  color: kBlackColor,
+);
 const paragraph6 = TextStyle(
   fontSize: 12.0,
   //height: 24.0,

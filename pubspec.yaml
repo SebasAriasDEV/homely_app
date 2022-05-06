@@ -27,10 +27,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: ^2.1.0
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
   flutter_svg: ^1.0.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -69,14 +71,15 @@ flutter:
         - asset: fonts/Avenir-Roman.ttf
           weight: 300
         - asset: fonts/Avenir-Book.ttf
+          weight: 400
         - asset: fonts/Avenir-Medium.ttf
           weight: 500
         - asset: fonts/Avenir-Heavy.ttf
           weight: 700
         - asset: fonts/Avenir-Black.ttf
           weight: 900
-        - asset: fonts/Avenir-Heavy.ttf
-          weight: 700
+        - asset: fonts/Avenir-Book.ttf
+          weight: 600
         - asset: fonts/Avenir-Oblique.ttf
           style: italic
   # For details regarding fonts from package dependencies,

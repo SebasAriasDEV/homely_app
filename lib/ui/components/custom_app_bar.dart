@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:homely_app/ui/components/custom_buttons.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
 import 'package:homely_app/utils/themes/themes.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String title;
+  final String subtitle;
+  final bool hasBackButton;
+
   const CustomAppBar({
     Key? key,
+    required this.title,
+    required this.subtitle,
+    this.hasBackButton = false,
   }) : super(key: key);
 
   @override
@@ -18,11 +26,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         margin: EdgeInsets.only(left: padding, right: padding, top: 10.0),
         child: Row(
           children: [
-            const _ProfileAvatar(),
+            hasBackButton
+                ? SquaredWhiteButton(onTap: () => Navigator.pop(context))
+                : const _ProfileAvatar(),
             const SizedBox(width: 15),
-            const _AppBarTexts(
-              smallText: 'Bienvenido 👋🏻',
-              title: 'Sebastián Arias',
+            _AppBarTexts(
+              smallText: subtitle,
+              title: title,
             ),
             Expanded(child: Container()),
             const _AppBarNotifButton(hasNotification: true),

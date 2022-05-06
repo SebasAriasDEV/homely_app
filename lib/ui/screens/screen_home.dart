@@ -6,9 +6,11 @@ import 'package:homely_app/ui/components/bottom_navigation_bar.dart';
 import 'package:homely_app/ui/components/custom_app_bar.dart';
 import 'package:homely_app/ui/components/home_components/explore_button.dart';
 import 'package:homely_app/ui/components/home_components/home_clasificados_cards.dart';
+import 'package:homely_app/ui/components/home_components/home_cta_button.dart';
 import 'package:homely_app/ui/components/home_components/home_news_cards.dart';
 import 'package:homely_app/ui/components/home_components/home_reservations_cards.dart';
 import 'package:homely_app/ui/components/home_components/home_section_header.dart';
+import 'package:homely_app/ui/screens/clasificados/screen_clasificados.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/themes.dart';
 
@@ -22,19 +24,24 @@ class HomeScreen extends StatelessWidget {
     final padding = CustomThemes.horizontalPadding;
 
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const CustomAppBar(
+          title: 'Sebastián Arias', subtitle: 'Bienvenido 👋🏻'),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            HomeExploreButtons(padding: padding),
+            // HomeExploreButtons(padding: padding),
 
-            // HomeCTAButton(padding: padding),
+            HomeCTAButton(padding: padding),
             HomeSectionHeader(title: 'Últimas Noticias', onTap: () {}),
             HomeNewsList(articles: Article.testingArticles),
             HomeSectionHeader(title: 'Reserva Zonas Comunes', onTap: () {}),
             HomeReservationsList(facilities: Facility.testingFacilities),
-            HomeSectionHeader(title: 'Últimos Clasificados', onTap: () {}),
+            HomeSectionHeader(
+              title: 'Últimos Clasificados',
+              onTap: () =>
+                  Navigator.pushNamed(context, ClasificadosScreen.name),
+            ),
             HomeClasificadosList(clasificados: Clasificado.testingClasificados),
             const SizedBox(height: 30),
           ],
@@ -76,7 +83,7 @@ class HomeExploreButtons extends StatelessWidget {
               ExploreButton(
                 color: kDirectoryColor,
                 screen: Text('News Screen'),
-                svgIcon: 'assets/icons/route-square.svg',
+                svgIcon: 'assets/icons/directory-inactive.svg',
                 text: 'Directorio',
               ),
             ],
@@ -93,13 +100,13 @@ class HomeExploreButtons extends StatelessWidget {
               ExploreButton(
                 color: kPQRSColor,
                 screen: Text('News Screen'),
-                svgIcon: 'assets/icons/document.svg',
+                svgIcon: 'assets/icons/pqrs-inactive.svg',
                 text: 'PQRS',
               ),
               ExploreButton(
                 color: kOtherColor,
                 screen: Text('News Screen'),
-                svgIcon: 'assets/icons/route-square.svg',
+                svgIcon: 'assets/icons/others-inactive.svg',
                 text: 'Otros',
               ),
             ],

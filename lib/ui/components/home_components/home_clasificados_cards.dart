@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:homely_app/models/clasificado_model.dart';
 import 'package:homely_app/ui/components/icon_text_label.dart';
 import 'package:homely_app/ui/components/label_box.dart';
+import 'package:homely_app/ui/screens/clasificados/clasificado_details.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
 import 'package:homely_app/utils/themes/themes.dart';
@@ -55,56 +56,63 @@ class _HomeClasificadoCard extends StatelessWidget {
 
     int.parse(days) >= 999 ? days = '999' : days = days;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 106,
-          width: 188,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(clasificado.img, fit: BoxFit.fill),
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, ClasificadoDetails.name,
+          arguments: clasificado),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Hero(
+            tag: '${clasificado.img}${clasificado.createdAt}',
+            child: SizedBox(
+              height: 106,
+              width: 188,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.network(clasificado.img, fit: BoxFit.fill),
+              ),
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          clasificado.title,
-          style: headline8,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconTextLabel(
-              text: clasificado.contactPhone,
-              iconPath: 'assets/icons/message.svg',
-            ),
-            IconTextLabel(
-              text: clasificado.userUnit,
-              iconPath: 'assets/icons/profile.svg',
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            LabelBox(
-              text: clasificado.type,
-              backgroundColor: kPrimaryColorShade4,
-              textColor: kPrimaryColor,
-            ),
-            LabelBox(
-              text: '$days dias',
-              svgIcon: 'assets/icons/clock.svg',
-              backgroundColor: kGreyColorShade4,
-              textColor: kGreyColor,
-            ),
-          ],
-        ),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            clasificado.title,
+            style: headline8,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconTextLabel(
+                text: clasificado.contactPhone,
+                iconPath: 'assets/icons/message.svg',
+              ),
+              IconTextLabel(
+                text: clasificado.userUnit,
+                iconPath: 'assets/icons/profile.svg',
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              LabelBox(
+                text: clasificado.type,
+                backgroundColor: kPrimaryColorShade4,
+                textColor: kPrimaryColor,
+              ),
+              LabelBox(
+                text: '$days dias',
+                svgIcon: 'assets/icons/clock.svg',
+                backgroundColor: kGreyColorShade4,
+                textColor: kGreyColor,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

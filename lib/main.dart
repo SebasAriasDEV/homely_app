@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:homely_app/ui/screens/clasificados/clasificado_details.dart';
+import 'package:homely_app/ui/screens/clasificados/screen_clasificados.dart';
 import 'package:homely_app/ui/screens/screen_home.dart';
+import 'package:homely_app/ui/screens/screen_test.dart';
 import 'package:homely_app/utils/themes/themes.dart';
 
 void main() {
@@ -19,6 +22,9 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.name,
       routes: {
         HomeScreen.name: (_) => const HomeScreen(),
+        ClasificadosScreen.name: (_) => const ClasificadosScreen(),
+        ClasificadoDetails.name: (_) => const ClasificadoDetails(),
+        '/test': (_) => const Test(),
       },
     );
   }
