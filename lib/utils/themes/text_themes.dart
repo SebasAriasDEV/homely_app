@@ -63,6 +63,14 @@ const headline8 = TextStyle(
   color: kBlackColor,
 );
 
+const paragraph1 = TextStyle(
+  fontSize: 18.0,
+  //height: 24.0,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.w300,
+  color: kGreyColor,
+);
+
 const paragraph2 = TextStyle(
   fontSize: 16.0,
   //height: 24.0,

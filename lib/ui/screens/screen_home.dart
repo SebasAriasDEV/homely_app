@@ -10,6 +10,7 @@ import 'package:homely_app/ui/components/home_components/home_cta_button.dart';
 import 'package:homely_app/ui/components/home_components/home_news_cards.dart';
 import 'package:homely_app/ui/components/home_components/home_reservations_cards.dart';
 import 'package:homely_app/ui/components/home_components/home_section_header.dart';
+import 'package:homely_app/ui/screens/articles/screen_articles.dart';
 import 'package:homely_app/ui/screens/clasificados/screen_clasificados.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/themes.dart';
@@ -33,7 +34,10 @@ class HomeScreen extends StatelessWidget {
             // HomeExploreButtons(padding: padding),
 
             HomeCTAButton(padding: padding),
-            HomeSectionHeader(title: 'Últimas Noticias', onTap: () {}),
+            HomeSectionHeader(
+              title: 'Últimas Noticias',
+              onTap: () => Navigator.pushNamed(context, ArticlesScreen.name),
+            ),
             HomeNewsList(articles: Article.testingArticles),
             HomeSectionHeader(title: 'Reserva Zonas Comunes', onTap: () {}),
             HomeReservationsList(facilities: Facility.testingFacilities),

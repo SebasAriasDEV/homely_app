@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ClasificadoImage extends StatelessWidget {
-  const ClasificadoImage({
+class ArticleImage extends StatelessWidget {
+  const ArticleImage({
     Key? key,
     required this.imgURL,
     required this.size,
@@ -20,7 +20,7 @@ class ClasificadoImage extends StatelessWidget {
       child: FadeInImage(
         placeholder: const AssetImage('assets/images/Profile.jpg'),
         image: NetworkImage(imgURL),
-        height: size.height * 0.45,
+        height: size.height * 0.2,
         width: double.infinity,
         fit: BoxFit.cover,
       ),

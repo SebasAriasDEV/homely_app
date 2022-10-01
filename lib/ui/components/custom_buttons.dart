@@ -16,22 +16,58 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: MaterialButton(
-        onPressed: () => onTap,
-        color: kPrimaryColor,
-        height: 56,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+    return FadeInUp(
+      from: 5.0,
+      child: SizedBox(
+        width: double.infinity,
+        child: MaterialButton(
+          onPressed: () => onTap(),
+          color: kPrimaryColor,
+          height: 56,
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: Text(text, style: headline6.copyWith(color: kWhiteColor)),
         ),
-        child: Text(text, style: paragraph2.copyWith(color: kWhiteColor)),
       ),
     );
   }
 }
 
+class SecondaryButoton extends StatelessWidget {
+  final String text;
+  final Function onTap;
+
+  const SecondaryButoton({
+    Key? key,
+    required this.text,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeInUp(
+      from: 5.0,
+      child: SizedBox(
+        width: double.infinity,
+        child: MaterialButton(
+          onPressed: () => onTap(),
+          //color: kPrimaryColor,
+          height: 56,
+          elevation: 0.0,
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: kPrimaryColor),
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: Text(text, style: headline6.copyWith(color: kPrimaryColor)),
+        ),
+      ),
+    );
+  }
+}
+
+//Boton pequeño para regresar a la pantalla anterior (con animacion)
 class SquaredWhiteButton extends StatelessWidget {
   final String assetPath;
   final Function onTap;

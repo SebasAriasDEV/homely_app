@@ -13,6 +13,12 @@ class ClasificadosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Clasificado> clasificados = Clasificado.testingClasificados;
+    final List<String> options = [
+      'Apartamentos',
+      'Servicios',
+      'Productos',
+      'Otros'
+    ];
 
     return Scaffold(
       appBar: const CustomAppBar(
@@ -24,7 +30,7 @@ class ClasificadosScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SearchTextField(),
-          const HorizontalCategoryFilters(),
+          HorizontalCategoryFilters(options: options, selectedIndex: 0),
           const SizedBox(height: 10),
           Expanded(
             child: ListView.separated(

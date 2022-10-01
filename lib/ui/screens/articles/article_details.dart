@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:homely_app/models/clasificado_model.dart';
-import 'package:homely_app/ui/components/clasificados_components/clasificado_image.dart';
-import 'package:homely_app/ui/components/clasificados_components/labels_clasificados.dart';
-import 'package:homely_app/ui/components/clasificados_components/title_and_price.dart';
+import 'package:homely_app/helpers/common_functions.dart';
+import 'package:homely_app/models/article_model.dart';
+import 'package:homely_app/ui/components/articles/article_image.dart';
 import 'package:homely_app/ui/components/custom_buttons.dart';
+import 'package:homely_app/ui/components/label_box.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
 import 'package:homely_app/utils/themes/themes.dart';
 
-class ClasificadoDetails extends StatelessWidget {
-  const ClasificadoDetails({Key? key}) : super(key: key);
+class ArticleDetails extends StatelessWidget {
+  const ArticleDetails({Key? key}) : super(key: key);
 
-  static String get name => '/clasificadoDetails';
+  static String get name => '/articleDetails';
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final Clasificado clasificado =
-        ModalRoute.of(context)!.settings.arguments as Clasificado;
+    final Article article =
+        ModalRoute.of(context)!.settings.arguments as Article;
 
     return Scaffold(
         body: Stack(
@@ -27,11 +27,11 @@ class ClasificadoDetails extends StatelessWidget {
           child: Column(
             children: [
               Hero(
-                tag: '${clasificado.img}${clasificado.createdAt}',
-                child: ClasificadoImage(imgURL: clasificado.img, size: size),
+                tag: '${article.img}${article.createdAt}',
+                child: ArticleImage(imgURL: article.img, size: size),
               ),
               const SizedBox(height: 15.0),
-              ClasificadoDetailedInfo(clasificado: clasificado),
+              ClasificadoDetailedInfo(article: article),
             ],
           ),
         ),
@@ -65,10 +65,10 @@ class ClasificadoDetails extends StatelessWidget {
 class ClasificadoDetailedInfo extends StatelessWidget {
   const ClasificadoDetailedInfo({
     Key? key,
-    required this.clasificado,
+    required this.article,
   }) : super(key: key);
 
-  final Clasificado clasificado;
+  final Article article;
 
   @override
   Widget build(BuildContext context) {
@@ -78,27 +78,41 @@ class ClasificadoDetailedInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TitleAndPrice(clasificado: clasificado),
-          const SizedBox(height: 5.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              LabelBox(
+                text: article.keyWord,
+                backgroundColor: kPrimaryColorShade4,
+                textColor: kPrimaryColor,
+              ),
+              const SizedBox(width: 8.0),
+              LabelBox(
+                text: '${CommonFunctions.daysFromNow(article.createdAt)} dias',
+                svgIcon: 'assets/icons/clock.svg',
+                backgroundColor: kGreyColorShade4,
+                textColor: kGreyColor,
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 10.0),
+          Text(article.title, style: headline3),
+          // LabelsClasificados(article: article),
+          const SizedBox(height: 10.0),
           Text(
-            'Publicado por ${clasificado.userUnit}',
+            'Publicado por ${article.userUnit}',
             style: paragraph6.copyWith(color: kGreyColor),
           ),
-          const SizedBox(height: 20.0),
-          LabelsClasificados(clasificado: clasificado),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 10.0),
           const Text('Detalles', style: headline6),
           const SizedBox(height: 10.0),
           Text(
-            clasificado.content,
+            article.content,
             style: paragraph5,
             textAlign: TextAlign.justify,
           ),
-          const SizedBox(height: 20.0),
-          PrimaryButton(
-            text: 'Contactar',
-            onTap: () {},
-          ),
+
           const SizedBox(height: 50),
         ],
       ),

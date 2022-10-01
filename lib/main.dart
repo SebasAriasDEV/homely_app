@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:homely_app/ui/screens/articles/article_details.dart';
+import 'package:homely_app/ui/screens/articles/screen_articles.dart';
 import 'package:homely_app/ui/screens/clasificados/clasificado_details.dart';
 import 'package:homely_app/ui/screens/clasificados/screen_clasificados.dart';
+import 'package:homely_app/ui/screens/login/screen_landing.dart';
+import 'package:homely_app/ui/screens/login/screen_login.dart';
 import 'package:homely_app/ui/screens/screen_home.dart';
 import 'package:homely_app/ui/screens/screen_test.dart';
 import 'package:homely_app/utils/themes/themes.dart';
@@ -19,11 +23,15 @@ class MyApp extends StatelessWidget {
       title: 'Homely App',
       debugShowCheckedModeBanner: false,
       theme: CustomThemes.mainTheme,
-      initialRoute: HomeScreen.name,
+      initialRoute: LandingScreen.name,
       routes: {
         HomeScreen.name: (_) => const HomeScreen(),
         ClasificadosScreen.name: (_) => const ClasificadosScreen(),
         ClasificadoDetails.name: (_) => const ClasificadoDetails(),
+        ArticlesScreen.name: (_) => const ArticlesScreen(),
+        ArticleDetails.name: (_) => const ArticleDetails(),
+        LoginScreen.name: (_) => const LoginScreen(),
+        LandingScreen.name: (_)=> const LandingScreen(),
         '/test': (_) => const Test(),
       },
     );
