@@ -34,6 +34,7 @@ class LandingScreen extends StatelessWidget {
             Expanded(
               flex: 5,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 10),
                   const Text('Bienvendio a Homely',

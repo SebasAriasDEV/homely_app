@@ -7,11 +7,13 @@ import 'package:homely_app/utils/themes/text_themes.dart';
 class PrimaryButton extends StatelessWidget {
   final String text;
   final Function onTap;
+  final bool isLoading;
 
   const PrimaryButton({
     Key? key,
     required this.text,
     required this.onTap,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -22,13 +24,15 @@ class PrimaryButton extends StatelessWidget {
         width: double.infinity,
         child: MaterialButton(
           onPressed: () => onTap(),
-          color: kPrimaryColor,
+          color: isLoading ? kGreyColorShade2 : kPrimaryColor,
           height: 56,
           elevation: 0.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
-          child: Text(text, style: headline6.copyWith(color: kWhiteColor)),
+          child: isLoading
+              ? const CircularProgressIndicator(color: kGreyColor)
+              : Text(text, style: headline6.copyWith(color: kWhiteColor)),
         ),
       ),
     );

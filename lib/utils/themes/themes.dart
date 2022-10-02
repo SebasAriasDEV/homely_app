@@ -31,7 +31,7 @@ class CustomThemes {
     //Buttons
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-      primary: kPrimaryColor,
+      foregroundColor: kPrimaryColor,
     )),
 
     //TextFields

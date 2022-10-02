@@ -19,8 +19,8 @@ class User {
     required this.building,
     required this.unit,
     required this.createdAt,
-    required this.fcmToken,
-    required this.fcmTokenDate,
+    // required this.fcmToken,
+    // required this.fcmTokenDate,
   });
 
   final String id;
@@ -32,8 +32,8 @@ class User {
   final String building;
   final String unit;
   final DateTime createdAt;
-  final String fcmToken;
-  final DateTime fcmTokenDate;
+  // final String fcmToken;
+  // final DateTime fcmTokenDate;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["_id"],
@@ -45,8 +45,8 @@ class User {
         building: json["building"],
         unit: json["unit"],
         createdAt: DateTime.parse(json["createdAt"]),
-        fcmToken: json["fcmToken"],
-        fcmTokenDate: DateTime.parse(json["fcmTokenDate"]),
+        // fcmToken: json["fcmToken"],
+        // fcmTokenDate: DateTime.parse(json["fcmTokenDate"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,7 +59,7 @@ class User {
         "building": building,
         "unit": unit,
         "createdAt": createdAt.toIso8601String(),
-        "fcmToken": fcmToken,
-        "fcmTokenDate": fcmTokenDate.toIso8601String(),
+        // "fcmToken": fcmToken,
+        // "fcmTokenDate": fcmTokenDate.toIso8601String(),
       };
 }
