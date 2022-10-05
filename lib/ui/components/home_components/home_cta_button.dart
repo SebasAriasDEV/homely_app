@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:homely_app/providers/auth_provider.dart';
+import 'package:homely_app/ui/screens/login/screen_landing.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/text_themes.dart';
+import 'package:provider/provider.dart';
 
 class HomeCTAButton extends StatelessWidget {
   const HomeCTAButton({
@@ -32,7 +35,12 @@ class HomeCTAButton extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        final _authService = Provider.of<AuthProvider>(context, listen: false);
+        _authService.logout();
+        Navigator.pushNamedAndRemoveUntil(
+            context, LandingScreen.name, (route) => false);
+      },
     );
   }
 }

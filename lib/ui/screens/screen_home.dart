@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:homely_app/models/article_model.dart';
 import 'package:homely_app/models/clasificado_model.dart';
 import 'package:homely_app/models/facility_model.dart';
+import 'package:homely_app/models/user_model.dart';
+import 'package:homely_app/providers/articles_list_provider.dart';
+import 'package:homely_app/providers/auth_provider.dart';
 import 'package:homely_app/ui/components/bottom_navigation_bar.dart';
 import 'package:homely_app/ui/components/custom_app_bar.dart';
 import 'package:homely_app/ui/components/home_components/explore_button.dart';
@@ -14,31 +16,63 @@ import 'package:homely_app/ui/screens/articles/screen_articles.dart';
 import 'package:homely_app/ui/screens/clasificados/screen_clasificados.dart';
 import 'package:homely_app/utils/colors.dart';
 import 'package:homely_app/utils/themes/themes.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   static String get name => '/home';
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final AuthProvider _authProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final _articlesListProvider =
+        Provider.of<ArticlesListProvider>(context, listen: false);
+    if (_articlesListProvider.firstLoadDone == false) {
+      _articlesListProvider.getArticles(_authProvider.token);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final _articlesListProvider = Provider.of<ArticlesListProvider>(context);
+
     final padding = CustomThemes.horizontalPadding;
+    final User _currentUser = _authProvider.currentUser;
 
     return Scaffold(
-      appBar: const CustomAppBar(
-          title: 'Sebastián Arias', subtitle: 'Bienvenido 👋🏻'),
+      appBar: CustomAppBar(
+          title: '${_currentUser.firstName} ${_currentUser.lastName}',
+          subtitle: 'Bienvenido 👋🏻'),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // HomeExploreButtons(padding: padding),
-
+            //HomeExploreButtons(padding: padding),
             HomeCTAButton(padding: padding),
             HomeSectionHeader(
               title: 'Últimas Noticias',
               onTap: () => Navigator.pushNamed(context, ArticlesScreen.name),
             ),
-            HomeNewsList(articles: Article.testingArticles),
+            _articlesListProvider.firstLoadDone
+                ? HomeNewsList(
+                    articles: _articlesListProvider.articles.length >= 3
+                        ? _articlesListProvider.articles.sublist(0, 3)
+                        : _articlesListProvider.articles,
+                  )
+                : LottieBuilder.asset(
+                    'assets/lottie/loadingAnimation.json',
+                    height: 200,
+                  ),
             HomeSectionHeader(title: 'Reserva Zonas Comunes', onTap: () {}),
             HomeReservationsList(facilities: Facility.testingFacilities),
             HomeSectionHeader(

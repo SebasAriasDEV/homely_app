@@ -12,7 +12,8 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(CustomThemes.horizontalPadding),
+      padding: EdgeInsets.symmetric(
+          horizontal: CustomThemes.horizontalPadding, vertical: 15.0),
       child: TextFormField(
         decoration: const InputDecoration().copyWith(
           hintText: 'Buscar...',

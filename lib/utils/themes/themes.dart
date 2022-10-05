@@ -26,6 +26,8 @@ class CustomThemes {
       headline4: headline4,
       headline5: headline5,
       headline6: headline6,
+      bodyText1: paragraph5,
+      bodyText2: paragraph5,
     ),
 
     //Buttons

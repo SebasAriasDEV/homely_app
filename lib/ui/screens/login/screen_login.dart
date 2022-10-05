@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:homely_app/providers/auth_provider.dart';
 import 'package:homely_app/providers/login_provider.dart';
 import 'package:homely_app/ui/components/custom_buttons.dart';
 import 'package:homely_app/ui/screens/screen_home.dart';
@@ -17,20 +18,24 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginProvider _loginProvider = Provider.of<LoginProvider>(context);
+    final _loginProvider = Provider.of<LoginProvider>(context);
+    final _authProvider = Provider.of<AuthProvider>(context);
     final padding = CustomThemes.horizontalPadding;
 
     //Functions
     Future<void> loginUser() async {
       String loginResponse = await _loginProvider.loginUser();
       if (loginResponse == 'OK') {
+        //Guardo el current user en el AuthProvider pq ese es el que se usa en toda la app
+        _authProvider.currentUser = _loginProvider.currentUser!;
+
         Navigator.pushNamedAndRemoveUntil(
             context, HomeScreen.name, (route) => false);
       } else {
         showTopSnackBar(
           context,
           CustomSnackBar.error(
-            message: loginResponse,
+            message: _loginProvider.errorMessage!,
             backgroundColor: kRedTextColor,
           ),
         );
@@ -118,6 +123,7 @@ class _LoginTextFieldsState extends State<LoginTextFields> {
 
   @override
   Widget build(BuildContext context) {
+    final _loginProvider = Provider.of<LoginProvider>(context);
     return Column(
       children: [
         TextField(
@@ -138,6 +144,7 @@ class _LoginTextFieldsState extends State<LoginTextFields> {
         TextField(
           controller: _passwordController,
           style: paragraph2,
+          obscureText: _loginProvider.obscurePassword,
           decoration: const InputDecoration().copyWith(
             fillColor: kGreyColorShade4,
             hintText: 'Contraseña',
@@ -146,6 +153,16 @@ class _LoginTextFieldsState extends State<LoginTextFields> {
             prefixIcon: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SvgPicture.asset('assets/icons/password-placeholder.svg'),
+            ),
+            suffixIcon: GestureDetector(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: _loginProvider.obscurePassword
+                    ? SvgPicture.asset('assets/icons/eye.svg')
+                    : SvgPicture.asset('assets/icons/eye-slash.svg'),
+              ),
+              onTap: () => _loginProvider.obscurePassword =
+                  !_loginProvider.obscurePassword,
             ),
           ),
         ),

@@ -38,6 +38,7 @@ class ArticleThumbnailBox extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,

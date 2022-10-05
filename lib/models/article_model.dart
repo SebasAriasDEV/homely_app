@@ -76,7 +76,7 @@ class Article {
         buildingName: json["building"]["name"],
         isDeleted: json["isDeleted"],
         createdAt: DateTime.parse(json["createdAt"]),
-        img: json["img"],
+        img: json["img"] ?? 'https://images.pexels.com/photos/13771245/pexels-photo-13771245.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       );
 
   Map<String, dynamic> toJson() => {

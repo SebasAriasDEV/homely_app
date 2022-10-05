@@ -5,12 +5,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:homely_app/models/server_responses/login_response.dart';
+import 'package:homely_app/models/server_responses/request_errors_response.dart';
+import 'package:homely_app/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class LoginProvider extends ChangeNotifier {
   String _email = '';
   String _password = '';
   bool _loading = false;
+  bool _obscurePassword = true;
+  User? currentUser;
+  String? errorMessage;
 
   //************* Getters and setters ****************
   set email(String value) {
@@ -25,10 +30,17 @@ class LoginProvider extends ChangeNotifier {
     _loading = value;
     notifyListeners();
   }
+  set obscurePassword(bool value) {
+    _obscurePassword = value;
+    notifyListeners();
+  }
 
   bool get loading => _loading;
+  bool get obscurePassword => _obscurePassword;
 
   //************ Functions ***************************
+
+  // Login User
   Future<String> loginUser() async {
     loading = true;
 
@@ -45,14 +57,21 @@ class LoginProvider extends ChangeNotifier {
       final LoginResponse _loginResponse =
           LoginResponse.fromJson(jsonDecode(response.body));
 
-      //Sve token in secure storage
+      //Save token in secure storage
       const _storage = FlutterSecureStorage();
       await _storage.write(key: 'loginToken', value: _loginResponse.token);
 
+      //Save current user
+      currentUser = _loginResponse.userFound;
 
       loading = false;
       return 'OK';
     } else {
+      final ErrorsReponse _errorsReponse =
+          ErrorsReponse.fromJson(jsonDecode(response.body));
+
+      //Saves the error message so it can be displayed in the app as snackbar
+      errorMessage = _errorsReponse.toString();
       loading = false;
       return response.body;
     }

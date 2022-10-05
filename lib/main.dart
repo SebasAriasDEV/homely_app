@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homely_app/providers/articles_list_provider.dart';
 import 'package:homely_app/providers/auth_provider.dart';
 import 'package:homely_app/providers/login_provider.dart';
 import 'package:homely_app/ui/screens/articles/article_details.dart';
@@ -25,8 +26,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => LoginProvider(), lazy: true),
+        ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: true),
+        ChangeNotifierProvider(
+            create: (_) => ArticlesListProvider(), lazy: true),
       ],
       child: MaterialApp(
         title: 'Homely App',

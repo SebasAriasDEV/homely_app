@@ -18,7 +18,7 @@ class WrapperScreen extends StatelessWidget {
         Provider.of<AuthProvider>(context, listen: false);
 
     return FutureBuilder<bool>(
-      future: _authProvider.checkToken(),
+      future: _authProvider.validateLoginStatus(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.data == true) {
